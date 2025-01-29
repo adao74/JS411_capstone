@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Import from '../components/Import'
+import CreateWishlist from '../components/CreateWishlist'
 import { fetchMakes, removeCar } from '../redux/actions'
 
 const mapStateToProps = (state) => {
@@ -15,5 +15,5 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Import);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateWishlist);
 

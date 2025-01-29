@@ -1,11 +1,19 @@
 import React from 'react'
-import { AppBar, Toolbar, IconButton, 
-  Typography
-} from '@mui/material'
+import { AppBar, Toolbar, IconButton, Typography, Button } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 const Navigation = () => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        // Remove the access token cookie
+        Cookies.remove('access_token');
+        // Redirect to login page
+        navigate('/');
+    };
+
     return (
         <AppBar position="relative">
             <Toolbar>
@@ -17,10 +25,28 @@ const Navigation = () => {
                 </Typography>
                 <ul className="nav-list">
                     <li className="nav-list-item">
-                        <Link to="/homepage">Homepage</Link>
+                        <Button 
+                            color="inherit"
+                            onClick={() => navigate('/homepage')}
+                        >
+                            Home
+                        </Button>
                     </li>
                     <li className="nav-list-item">
-                        <Link to="/new-wishlist">New wishlist</Link>
+                        <Button 
+                            color="inherit"
+                            onClick={() => navigate('/new-wishlist')}
+                        >
+                            New wishlist
+                        </Button>
+                    </li>
+                    <li className="nav-list-item">
+                        <Button 
+                            color="inherit" 
+                            onClick={handleLogout}
+                        >
+                            Logout
+                        </Button>
                     </li>
                 </ul>
             </Toolbar>

@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Table, TableHead, TableBody, TableRow, TableCell, Checkbox, TextField, Button } from '@mui/material';
+import axios from 'axios';
 
-const Import = (props) => {
+const CreateWishlist = (props) => {
+    const { fetchMakes } = props;
     const [inputValue, setInputValue] = useState('');  // Add state for input
     const [selectedItems, setSelectedItems] = useState({});  // Add new state for selected items
 
     // Add useEffect to call fetchMakes on mount
     useEffect(() => {
-        props.fetchMakes();
-    }, []); // Empty dependency array means this runs once on mount
+        fetchMakes();
+    }, [fetchMakes]); // Add fetchMakes to dependency array
 
     const handleInputChange = (event) => {
         setInputValue(event.target.value);
@@ -24,8 +26,7 @@ const Import = (props) => {
         console.log('Selected items:', selectedItems);  // For debugging
     };
 
-    const handleCreateWishlist = () => {
-        // Get array of selected makes with full details
+    const handleCreateWishlist = async () => {
         const selectedMakes = props.makes
             .filter(make => selectedItems[make.MakeId])
             .map(make => ({
@@ -33,14 +34,22 @@ const Import = (props) => {
                 makeName: make.MakeName
             }));
 
-        // Create wishlist object
         const wishlist = {
             name: inputValue,
             items: selectedMakes
         };
 
-        console.log('Creating wishlist:', wishlist);  // For debugging
-        // TODO: Add API call or props function to save wishlist
+        try {
+            const response = await axios.post('/api/wishlists', wishlist);
+            console.log('Wishlist created:', response.data);
+            // Clear form
+            setInputValue('');
+            setSelectedItems({});
+            // Optionally show success message or redirect
+        } catch (error) {
+            console.error('Error creating wishlist:', error);
+            // Handle error (show error message to user)
+        }
     };
 
     return (
@@ -96,4 +105,4 @@ const Import = (props) => {
     );
 };
 
-export default Import;
+export default CreateWishlist;
