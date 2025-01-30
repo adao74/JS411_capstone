@@ -18,7 +18,7 @@ const Home = () => {
 
     const fetchWishlists = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/wishlists');
+            const response = await fetch('/api/wishlists');
             if (!response.ok) {
                 throw new Error('Failed to fetch wishlists');
             }
