@@ -108,7 +108,6 @@ const Home = () => {
                                             <Table size="small">
                                                 <TableHead>
                                                     <TableRow>
-                                                        <TableCell>Item ID</TableCell>
                                                         <TableCell>Make ID</TableCell>
                                                         <TableCell>Make Name</TableCell>
                                                     </TableRow>
@@ -116,7 +115,6 @@ const Home = () => {
                                                 <TableBody>
                                                     {wishlist.items && wishlist.items.map((item) => (
                                                         <TableRow key={item.id}>
-                                                            <TableCell>{item.id}</TableCell>
                                                             <TableCell>{item.make_id}</TableCell>
                                                             <TableCell>{item.make_name}</TableCell>
                                                         </TableRow>
