@@ -36,7 +36,7 @@ const Home = () => {
     const handleDelete = async (id) => {
         try {
             console.log('Deleting wishlist:', id); // Debug log
-            const url = `http://localhost:5000/api/wishlists/${id}`;
+            const url = `/api/wishlists/${id}`;
             console.log('Delete URL:', url); // Add this log
             
             const response = await fetch(url, {
